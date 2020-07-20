@@ -34,7 +34,7 @@ def base_reader(file):
         
    
     
-    new.to_csv(f'./result/{file}.csv')
+    new.to_csv(f'./result/{file}.csv',header = 0)
     
 base_reader('train')
 base_reader('test')
