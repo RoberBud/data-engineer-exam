@@ -12,11 +12,11 @@ def detect(path, detector):
     vals = []
     with open(path, newline='') as csvfile:
         rows = csv.DictReader(csvfile)
-        
         for row in rows:
             val = row.get('value')
+            ret = detector.fit_predict(val)
+            pred.append(float(ret))
             vals.append(float(val))
-        pred = detector.fit_predict(path)
     return vals, pred
 
 
@@ -33,7 +33,8 @@ if __name__ == '__main__':
 
         name = f'time-series/real_{i}.csv'
         path = archive.extract(member=name)
+
         vals, pred = detect(path, detector)
         plot(name, vals, pred)
-
+        
     shutil.rmtree('time-series')
